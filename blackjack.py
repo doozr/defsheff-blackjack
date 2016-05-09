@@ -4,11 +4,7 @@ from itertools import product
 class _Suit(object):
     def __init__(self, name):
         assert(name in ["Spades", "Hearts", "Clubs", "Diamonds"])
-        self.__name = name
-
-    @property
-    def name(self):
-        return self.__name
+        self.name = name
 
 _spades = _Suit("Spades")
 _hearts = _Suit("Hearts")
@@ -17,16 +13,8 @@ _diamonds = _Suit("Diamonds")
 
 class _Rank(object):
     def __init__(self, name, values):
-        self.__name = name
-        self.__values = values
-
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def values(self):
-        return self.__values
+        self.name = name
+        self.values = values
 
 class _Ace(_Rank):
     def __init__(self):
@@ -49,20 +37,8 @@ _king = _PictureCard("King")
 
 class _Card(object):
     def __init__(self, suit, rank):
-        self.__suit = suit
-        self.__rank = rank
-
-    @property
-    def suit(self):
-        return self.__suit.name
-
-    @property
-    def rank(self):
-        return self.__rank.name
-
-    @property
-    def values(self):
-        return self.__rank.values
+        self.suit = suit
+        self.rank = rank
 
     def __str__(self):
         return "%s of %s" % (self.rank, self.suit)
@@ -87,7 +63,7 @@ def deal(num_players, deck):
     return (hands, remaining_deck)
 
 def hand_value(hand):
-    possible_values = [sum(x) for x in product(*[ card.values for card in hand ])]
+    possible_values = [sum(x) for x in product(*[ card.rank.values for card in hand ])]
     valid_values = [value for value in possible_values if value <= 21]
     bust_values = [value for value in possible_values if value > 21]
     if valid_values:

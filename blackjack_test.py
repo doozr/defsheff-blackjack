@@ -8,7 +8,7 @@ def test_deck_has_13_of_each_suit():
         yield (has_13_in_suit, suit)
 
 def has_13_in_suit(suit):
-    cards = [card for card in blackjack.standard_deck() if card.suit == suit]
+    cards = [card for card in blackjack.standard_deck() if card.suit.name == suit]
     assert len(cards) == 13
 
 def test_deck_has_4_aces():
@@ -23,7 +23,7 @@ def test_deck_has_4_of_each_picture_card():
         yield(has_4_of_rank, rank)
 
 def has_4_of_rank(rank):
-    cards = [card for card in blackjack.standard_deck() if card.rank == rank]
+    cards = [card for card in blackjack.standard_deck() if card.rank.name == rank]
     assert len(cards) == 4
 
 def test_deck_has_no_duplicates():
